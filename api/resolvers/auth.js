@@ -65,6 +65,6 @@ module.exports = {
         expiresIn: '1h'
       }
     );
-    return { userId: user.id, token: token, tokenExpiration: 1 };
+    return { userId: user.id, role:user.role, token: token, tokenExpiration: 1 };
   }
 };

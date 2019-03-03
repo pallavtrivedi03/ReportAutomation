@@ -27,6 +27,7 @@ type Employee {
 
 type AuthData {
   userId: ID!
+  role: String!
   token: String!
   tokenExpiration: Int!
 }
