@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../../models/user');
+const Employee = require('../../models/employee');
 
 module.exports = {
   createUser: async args => {
@@ -10,12 +11,35 @@ module.exports = {
       if (existingUser) {
         throw new Error('User exists already.');
       }
+      const existingEmployee = await Employee.findOne({email: args.userInput.email });
+      
+      if (!existingEmployee) {
+        throw new Error('Email id is not registered.');
+      }
 
+      var role = "";
+      switch(existingEmployee.department) {
+        case "Technology":    //TODO: temporary check for development
+          role = "admin";
+          break;
+        case "MIS & BI":
+          role = "BI";
+          break;
+        case "Content Acquisition":
+          role = "CA";
+          break;
+        case "Finance & Accounts":
+          role = "FA";
+          break;
+        default:
+          role = "";
+      }
       const hashedPassword = await bcrypt.hash(args.userInput.password, 12);
 
       const user = new User({
         email: args.userInput.email,
-        password: hashedPassword
+        password: hashedPassword,
+        role: role
       });
 
       const result = await user.save();
