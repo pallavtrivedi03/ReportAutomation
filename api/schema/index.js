@@ -32,6 +32,23 @@ type AuthData {
   tokenExpiration: Int!
 }
 
+type Client {
+  _id: ID!
+  client: String!
+  territory: String!
+  origin: String!
+  service_name: String!
+}
+
+type Label {
+  _id: ID!
+  agreement_number: String!
+  vendor: String!
+  effective_date: String!
+  end_date: String!
+  deal: String!
+}
+
 input UserInput {
   email: String!
   password: String!
@@ -39,6 +56,8 @@ input UserInput {
 
 type RootQuery {
     login(email: String!, password: String!): AuthData!
+    clients: [Client!]!
+    labels: [Label!]!
 }
 
 type RootMutation {

@@ -1,7 +1,11 @@
 const authResolver = require('./auth');
+const clientResolver = require('./clients');
+const labelResolver = require('./labels');
 
 const rootResolver = {
-  ...authResolver
+  ...authResolver,
+  ...clientResolver,
+  ...labelResolver
 };
 
 module.exports = rootResolver;
