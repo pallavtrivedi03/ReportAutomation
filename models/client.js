@@ -7,18 +7,13 @@ const clientSchema = new Schema({
     type: String,
     required: true
   },
-  territory: {
-    type: String,
-    required: true
-  },
-  origin: {
-    type: String,
-    required: true
-  },
-  service_name: {
-    type: String,
-    required: true
-  }
+  services:[{
+    name: String,
+    regionInfo: [{
+      origin: String,
+      territory: String
+    }]
+  }]
 });
 
 module.exports = mongoose.model('Client', clientSchema);

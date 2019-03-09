@@ -35,18 +35,30 @@ type AuthData {
 type Client {
   _id: ID!
   client: String!
-  territory: String!
-  origin: String!
-  service_name: String!
+  services: [Service!]!
 }
 
 type Label {
   _id: ID!
-  agreement_number: String!
   vendor: String!
-  effective_date: String!
-  end_date: String!
+  agreements: [Agreement!]!
+}
+
+type Agreement {
+  agreementNumber: String!
+  effectiveDate: String!
+  endDate: String!
   deal: String!
+}
+
+type Service {
+  name: String!
+  regionInfo: [RegionInfo!]!
+}
+
+type RegionInfo {
+  origin: String!
+  territory: String!
 }
 
 input UserInput {
