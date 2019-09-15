@@ -61,9 +61,56 @@ type RegionInfo {
   territory: String!
 }
 
+type Report {
+  label: String!
+  deal: String!
+  type: String!
+  from: String!
+  to: String!
+  path: String!
+  status: String!
+  totalPayout: Float!
+  clients: [ReportClient!]!
+}
+
+type ReportClient {
+  client: String!
+  payout: Float!
+  services: [ReportService!]!
+}
+
+type ReportService {
+  name: String!
+  payout: Float!
+  regionInfo: [ReportRegionInfo!]!
+}
+
+type ReportRegionInfo {
+  origin: String!
+  territory: String!
+  payout: Float!
+}
+
 input UserInput {
   email: String!
   password: String!
+}
+
+input ReportInput {
+  label: String!
+  deal: String!
+  type: String!
+  from: String!
+  to: String!
+  path: String!
+  reportJson: String!
+  clients: [ClientInput!]!
+}
+
+input ClientInput {
+  client: String!
+  service: String!
+  origin: String!
 }
 
 type RootQuery {
@@ -74,6 +121,7 @@ type RootQuery {
 
 type RootMutation {
     createUser(userInput: UserInput): User
+    createReport(reportInput: ReportInput): Report
 }
 
 schema {
